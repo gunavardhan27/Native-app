@@ -1,6 +1,8 @@
-import { Image, SafeAreaView, ScrollView, StatusBar, StyleSheet,Text,View } from "react-native";
-import {Link} from 'expo-router'
+import { Image, SafeAreaView, ScrollView, StyleSheet,Text,View } from "react-native";
+import {StatusBar} from 'expo-status-bar'
+import {Link, router} from 'expo-router'
 import {images} from '../constants'
+import CustomButton from "../components/CustomButton";
 export default function App(){
   return (
     <SafeAreaView className='bg-primary h-full'>
@@ -20,10 +22,16 @@ export default function App(){
                  Aura
               </Text>
             </Text>
-            <Image source={images.path} resizeMode="contain" className='w-[136px] -right-2 -bottom-8 h-15 absolute ' />
+            <Image source={images.path} resizeMode="contain" className='w-[136px] -right-7 -bottom-3 h-4 absolute ' />
           </View>
+          <Text className='mt-14 text-white font-pregular'>Where Creativity meets Innovation</Text>
+          <CustomButton title='Continue with email'
+          handlePress={()=>router.push('/SignIn')}
+          containerStyles='w-full mt-7' />
         </View>
       </ScrollView>
+
+      <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   )
 }
