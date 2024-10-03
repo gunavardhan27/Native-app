@@ -1,9 +1,27 @@
 import { Image, SafeAreaView, ScrollView, StyleSheet,Text,View } from "react-native";
 import {StatusBar} from 'expo-status-bar'
-import {Link, router} from 'expo-router'
+import {Link, Redirect, router} from 'expo-router'
 import {images} from '../constants'
 import CustomButton from "../components/CustomButton";
+import { useUserStore } from "../store/Global";
+import { getCurrentUser } from "../lib/appwrite";
+import { useEffect } from "react";
 export default function App(){
+  useEffect(()=>{
+    try{
+      const user = getCurrentUser()
+      if(user){
+        setUser(user,true)
+      }
+    }catch(error){
+      Alert.alert('Error','log the user in')
+    }
+  },[])
+  const user = useUserStore((state)=>state.user)
+  const setUser = useUserStore((state)=>state.setUser)
+  if(user){
+    return <Redirect href='/Home' />
+  }
   return (
     <SafeAreaView className='bg-primary h-full'>
       <ScrollView contentContainerStyle={{height:'100%'}}>
