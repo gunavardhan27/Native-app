@@ -8,14 +8,17 @@ const FormField = ({title,value,handleChangeText,otherStyles,...props}) => {
       <Text className='text-white font-pbold'>{title}</Text>
       <View className='border-black-200 bg-black-100 focus:border-secondary flex-row items-center justify-between
       px-4 h-16 rounded-xl '>
+
         <TextInput className='text-white' value={value} onChangeText={handleChangeText}
         secureTextEntry={title==='Password' && !showPassword} />
+
         {title==='Password' && (
             <TouchableOpacity className='' onPress={()=>setShowPassword(d=>!d)}>
                 {showPassword ? <Image source={icons.eyeHide} resizeMode='contain'
                 className='w-[30px]  '
                  /> : <Image source={icons.eye} resizeMode='contain' className='w-[30px]' />}
             </TouchableOpacity>
+            
         )}
       </View>
     </View>
