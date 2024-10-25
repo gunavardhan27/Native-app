@@ -9,9 +9,10 @@ import Trending from '../../components/Trending'
 import Empty from '../../components/Empty'
 import { getAllPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
+import VideoCard from '../../components/VideoCard'
 const Home = () => {
-  const {posts,refetch} = useAppwrite(getAllPosts)
-  console.log(posts,'divya')
+  const posts = useAppwrite(getAllPosts)
+  //console.log(posts.posts,'divya')
   const dummyData = [{id:1},{id:2}] 
   const user = useUserStore((state)=>state.user)
   const [refreshing,setRefreshing] = useState(false)
@@ -25,10 +26,10 @@ const Home = () => {
     <SafeAreaView className='bg-primary h-full'>
       <FlatList
       className='m-5'
-      data={posts}
+      data={posts.posts}
       keyExtractor={(item)=>item.title}
       renderItem={({item})=>(
-        <Text className='text-3xl text-white'>{item.title}</Text>
+        <VideoCard video={item} />
       )}
       ListHeaderComponent={()=>(
         <View>
